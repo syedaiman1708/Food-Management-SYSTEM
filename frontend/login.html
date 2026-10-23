@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FoodNest | Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body class="auth-page">
+    <div class="auth-shell">
+      <div class="auth-panel panel-visual">
+        <div class="brand brand-auth">
+          <div class="brand-mark">F</div>
+          <span>FoodNest</span>
+        </div>
+        <h1>Welcome back.</h1>
+        <p>Manage orders, stock, and waste with confidence.</p>
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80" alt="Food service" />
+      </div>
+
+      <div class="auth-panel auth-form-panel">
+        <div class="auth-header">
+          <h2>Login to your account</h2>
+          <p>Use your staff or admin credentials.</p>
+        </div>
+        <form id="loginForm" class="stack-form">
+          <label>
+            <span>Username or email</span>
+            <input type="text" id="loginUsername" name="username" placeholder="admin or admin@foodnest.com" required />
+          </label>
+
+          <label>
+            <span>Password</span>
+            <div class="password-field">
+              <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required />
+              <button type="button" class="toggle-password" data-target="loginPassword">Show</button>
+            </div>
+          </label>
+
+          <div class="form-row between">
+            <label class="check-option"><input type="checkbox" /> Remember me</label>
+            <a href="mailto:hello@foodnest.io?subject=FoodNest%20password%20reset">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary full-width">Login</button>
+        </form>
+
+        <div class="form-switch">
+          <span>Need an account?</span>
+          <a href="register.html">Create one</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/app.js"></script>
+    <script src="./js/auth.js"></script>
+  </body>
+</html>

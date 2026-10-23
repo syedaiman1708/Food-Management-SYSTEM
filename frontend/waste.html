@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FoodNest | Waste</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body class="app-body">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-mark">F</div>
+        <span>FoodNest</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="menu.html">Menu Management</a>
+        <a href="orders.html">Orders</a>
+        <a href="inventory.html">Inventory</a>
+        <a href="customers.html">Customers</a>
+        <a class="active" href="waste.html">Food Waste</a>
+        <a href="reports.html">Reports & Analytics</a>
+        <a href="settings.html">Settings</a>
+        <button class="logout-btn" type="button">Logout</button>
+      </nav>
+    </aside>
+
+    <button class="mobile-nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰ Menu</button>
+    <main class="content-panel">
+      <header class="top-header">
+        <div>
+          <p class="eyebrow accent">Waste Tracker</p>
+          <h1>Food Waste Management</h1>
+        </div>
+        <div class="header-tools">
+          <button class="btn btn-primary" type="button" id="showWasteForm">Record Waste</button>
+        </div>
+      </header>
+
+      <section class="stats-grid compact" id="wasteSummary"></section>
+
+      <section class="panel tools-panel">
+        <div class="panel-header">
+          <h3>Waste record</h3>
+        </div>
+        <form id="wasteForm" class="grid-form">
+          <label>
+            <span>Ingredient / Food</span>
+            <input type="text" id="wasteIngredient" required />
+          </label>
+          <label>
+            <span>Quantity</span>
+            <input type="number" id="wasteQuantity" step="0.01" required />
+          </label>
+          <label>
+            <span>Reason</span>
+            <input type="text" id="wasteReason" required />
+          </label>
+          <label>
+            <span>Estimated Loss (₹)</span>
+            <input type="number" id="wasteLoss" step="0.01" required />
+          </label>
+          <div class="submit-row full-span">
+            <button type="submit" class="btn btn-primary">Save Record</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Reason</th>
+                <th>Date</th>
+                <th>Estimated cost</th>
+              </tr>
+            </thead>
+            <tbody id="wasteTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="./js/app.js"></script>
+    <script src="./js/waste.js"></script>
+  </body>
+</html>

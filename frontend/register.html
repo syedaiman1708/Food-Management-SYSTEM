@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FoodNest | Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body class="auth-page">
+    <div class="auth-shell">
+      <div class="auth-panel panel-visual">
+        <div class="brand brand-auth">
+          <div class="brand-mark">F</div>
+          <span>FoodNest</span>
+        </div>
+        <h1>Create a kitchen account.</h1>
+        <p>Build a smarter food operation from day one.</p>
+        <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=900&q=80" alt="Kitchen workspace" />
+      </div>
+
+      <div class="auth-panel auth-form-panel">
+        <div class="auth-header">
+          <h2>Register</h2>
+          <p>Set up a new team profile.</p>
+        </div>
+        <form id="registerForm" class="stack-form">
+          <label>
+            <span>Full name</span>
+            <input type="text" id="registerName" name="fullName" placeholder="Jane Smith" required />
+          </label>
+
+          <label>
+            <span>Username</span>
+            <input type="text" id="registerUsername" name="username" placeholder="jane" required />
+          </label>
+
+          <label>
+            <span>Email</span>
+            <input type="email" id="registerEmail" name="email" placeholder="jane@foodnest.com" required />
+          </label>
+
+          <label>
+            <span>Password</span>
+            <div class="password-field">
+              <input type="password" id="registerPassword" name="password" placeholder="Create a strong password" required />
+              <button type="button" class="toggle-password" data-target="registerPassword">Show</button>
+            </div>
+          </label>
+
+          <button type="submit" class="btn btn-primary full-width">Create account</button>
+        </form>
+
+        <div class="form-switch">
+          <span>Already have an account?</span>
+          <a href="login.html">Login</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/app.js"></script>
+    <script src="./js/auth.js"></script>
+  </body>
+</html>

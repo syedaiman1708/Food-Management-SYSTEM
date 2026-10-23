@@ -1,0 +1,18 @@
+{
+  "name": "foodnest",
+  "version": "1.0.0",
+  "description": "FoodNest — Smart Food & Inventory Management System",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
+    "express": "^4.19.2",
+    "express-session": "^1.19.0",
+    "mysql2": "^3.4.2"
+  }
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FoodNest | Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body class="app-body">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-mark">F</div>
+        <span>FoodNest</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="active" href="dashboard.html">Dashboard</a>
+        <a href="menu.html">Menu Management</a>
+        <a href="orders.html">Orders</a>
+        <a href="inventory.html">Inventory</a>
+        <a href="customers.html">Customers</a>
+        <a href="waste.html">Food Waste</a>
+        <a href="reports.html">Reports & Analytics</a>
+        <a href="settings.html">Settings</a>
+        <button class="logout-btn" type="button">Logout</button>
+      </nav>
+    </aside>
+
+    <button class="mobile-nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰ Menu</button>
+    <main class="content-panel">
+      <header class="top-header">
+        <div>
+          <p class="eyebrow accent">Overview</p>
+          <h1>Dashboard</h1>
+        </div>
+        <div class="header-tools">
+          <div class="search-box small">
+            <input type="text" placeholder="Search anything" />
+          </div>
+          <button class="btn btn-primary" type="button">Export</button>
+        </div>
+      </header>
+
+      <section class="summary-grid" id="summaryCards"></section>
+
+      <section class="content-grid dashboard-grid">
+        <div class="panel panel-large">
+          <div class="panel-header">
+            <h3>Paid sales trend</h3>
+            <select id="dashboardPeriod" aria-label="Sales chart period">
+              <option value="30">Last 30 days</option>
+              <option value="7">Last 7 days</option>
+              <option value="90">Last 90 days</option>
+            </select>
+          </div>
+          <div class="chart-container">
+            <canvas id="salesChart" aria-label="Daily paid sales chart" role="img"></canvas>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Popular food items</h3>
+          </div>
+          <div id="popularFoods" class="list-stack"></div>
+        </div>
+      </section>
+
+      <section class="content-grid dashboard-grid lower-grid">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Recent orders</h3>
+            <a href="orders.html">View all</a>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Order</th>
+                  <th>Customer</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="recentOrdersTable"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Low-stock alerts</h3>
+          </div>
+          <div id="lowStockList" class="list-stack"></div>
+        </div>
+      </section>
+
+      <section class="content-grid dashboard-grid lower-grid">
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Ingredients nearing expiry</h3>
+          </div>
+          <div id="expiringList" class="list-stack"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Recent activity</h3>
+          </div>
+          <div id="activityList" class="list-stack"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./js/app.js"></script>
+    <script src="./js/dashboard.js"></script>
+  </body>
+</html>
