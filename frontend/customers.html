@@ -77,8 +77,8 @@
             <input id="customerEmail" name="email" type="email" maxlength="120" autocomplete="email" required />
           </label>
           <label class="full-span">
-            <span>Phone</span>
-            <input id="customerPhone" name="phone" type="tel" maxlength="30" autocomplete="tel" required />
+            <span>Mobile number (10 digits)</span>
+            <input id="customerPhone" name="phone" type="tel" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" autocomplete="tel-national" title="Enter exactly 10 digits" required />
           </label>
           <div class="submit-row full-span">
             <button type="submit" class="btn btn-primary">Save Customer</button>

@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const { loadOrderData } = require('./order-storage');
 
 const categories = [
   { id: 1, name: 'Breakfast' },
@@ -88,6 +89,13 @@ const orderItems = [
   { id: 6, order_id: 4, food_item_id: 3, quantity: 2, unit_price: 420.00 },
   { id: 7, order_id: 4, food_item_id: 5, quantity: 1, unit_price: 260.00 },
 ];
+
+const savedOrderData = loadOrderData();
+if (savedOrderData) {
+  orders.splice(0, orders.length, ...savedOrderData.orders);
+  orderItems.splice(0, orderItems.length, ...savedOrderData.orderItems);
+  customers.splice(0, customers.length, ...savedOrderData.customers);
+}
 
 const foodWaste = [
   { id: 1, ingredient_name: 'Spinach', quantity: 2.5, reason: 'Overstock on leafy greens', waste_date: '2026-10-11T08:00:00.000Z', estimated_loss: 95.00 },

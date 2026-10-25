@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const customerDialogTitle = document.getElementById('customerDialogTitle');
   const customerForm = document.getElementById('customerForm');
   const customerDetails = document.getElementById('customerDetails');
+  const customerPhone = document.getElementById('customerPhone');
 
   let currentCustomers = [];
 
@@ -75,6 +76,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   addCustomerButton.addEventListener('click', () => openCustomerDialog('add'));
+
+  customerPhone.addEventListener('input', () => {
+    customerPhone.value = customerPhone.value.replace(/\D/g, '').slice(0, 10);
+  });
 
   customerDialog.addEventListener('click', (event) => {
     if (event.target === customerDialog || event.target.closest('[data-close-dialog]')) {

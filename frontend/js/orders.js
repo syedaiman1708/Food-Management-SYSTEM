@@ -2,8 +2,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   const orderTableBody = document.getElementById('orderTableBody');
   const statusFilter = document.getElementById('statusFilter');
   const orderSearch = document.getElementById('orderSearch');
+  const addFoodOrderButton = document.getElementById('addFoodOrderButton');
+  const foodOrderDialog = document.getElementById('foodOrderDialog');
+  const foodOrderForm = document.getElementById('foodOrderForm');
+  const foodOrderCustomer = document.getElementById('foodOrderCustomer');
+  const orderItemList = document.getElementById('orderItemList');
+  const foodOrderTotal = document.getElementById('foodOrderTotal');
+  const addOrderItemButton = document.getElementById('addOrderItemButton');
 
   let currentOrders = [];
+  let customers = [];
+  let menuItems = [];
 
   function escapeHTML(value) {
     return String(value ?? '').replace(/[&<>"']/g, (character) => ({
@@ -54,6 +63,70 @@ document.addEventListener('DOMContentLoaded', async () => {
       : '<tr><td colspan="9" class="empty-state">No orders found.</td></tr>';
   }
 
+  function renderOrderItems() {
+    const rows = [...orderItemList.querySelectorAll('.order-item-row')];
+    let total = 0;
+
+    rows.forEach((row) => {
+      const select = row.querySelector('.order-item-select');
+      const quantityInput = row.querySelector('.order-item-quantity');
+      const item = menuItems.find((entry) => entry.id === Number(select.value));
+      const quantity = Number(quantityInput.value) || 0;
+      if (item) total += Number(item.price) * quantity;
+      row.querySelector('.order-item-price').textContent = formatCurrency(item ? item.price * quantity : 0);
+    });
+
+    foodOrderTotal.textContent = formatCurrency(total);
+  }
+
+  function addOrderItemRow() {
+    const row = document.createElement('div');
+    row.className = 'order-item-row';
+    row.innerHTML = `
+      <label>
+        <span>Food item</span>
+        <select class="order-item-select" required>
+          ${menuItems.map((item) => `<option value="${item.id}">${escapeHTML(item.name)} — ${formatCurrency(item.price)}</option>`).join('')}
+        </select>
+      </label>
+      <label>
+        <span>Quantity</span>
+        <input class="order-item-quantity" type="number" min="1" step="1" value="1" required />
+      </label>
+      <strong class="order-item-price"></strong>
+      <button class="link-button remove-order-item" type="button" aria-label="Remove food item">Remove</button>
+    `;
+    orderItemList.appendChild(row);
+    renderOrderItems();
+  }
+
+  async function openFoodOrderDialog() {
+    addFoodOrderButton.disabled = true;
+    try {
+      const [customerResponse, menuResponse] = await Promise.all([
+        apiFetch('/customers'),
+        apiFetch('/menu'),
+      ]);
+      customers = customerResponse.customers;
+      menuItems = menuResponse.items.filter((item) => item.available);
+      if (!customers.length || !menuItems.length) {
+        throw new Error('Add a customer and an available food item before creating an order.');
+      }
+
+      foodOrderCustomer.innerHTML = customers
+        .map((customer) => `<option value="${customer.id}">${escapeHTML(customer.name)} (${escapeHTML(customer.phone)})</option>`)
+        .join('');
+      orderItemList.innerHTML = '';
+      addOrderItemRow();
+      foodOrderDialog.showModal();
+    } catch (error) {
+      redirectIfUnauthenticated(error);
+      showToast(error.message, 'error');
+    } finally {
+      addFoodOrderButton.disabled = false;
+    }
+  }
+
   async function loadOrders() {
     try {
       const response = await apiFetch(`/orders?status=${statusFilter.value}`);
@@ -66,6 +139,55 @@ document.addEventListener('DOMContentLoaded', async () => {
       showToast(error.message, 'error');
     }
   }
+
+  addFoodOrderButton.addEventListener('click', openFoodOrderDialog);
+  addOrderItemButton.addEventListener('click', addOrderItemRow);
+  foodOrderDialog.addEventListener('click', (event) => {
+    if (event.target === foodOrderDialog || event.target.closest('[data-close-order-dialog]')) {
+      foodOrderDialog.close();
+    }
+  });
+
+  orderItemList.addEventListener('input', renderOrderItems);
+  orderItemList.addEventListener('change', renderOrderItems);
+  orderItemList.addEventListener('click', (event) => {
+    const removeButton = event.target.closest('.remove-order-item');
+    if (!removeButton) return;
+    const rows = orderItemList.querySelectorAll('.order-item-row');
+    if (rows.length === 1) {
+      showToast('An order must contain at least one food item.', 'error');
+      return;
+    }
+    removeButton.closest('.order-item-row').remove();
+    renderOrderItems();
+  });
+
+  foodOrderForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const submitButton = foodOrderForm.querySelector('[type="submit"]');
+    const items = [...orderItemList.querySelectorAll('.order-item-row')].map((row) => ({
+      food_item_id: Number(row.querySelector('.order-item-select').value),
+      quantity: Number(row.querySelector('.order-item-quantity').value),
+    }));
+
+    submitButton.disabled = true;
+    try {
+      const response = await apiFetch('/orders', {
+        method: 'POST',
+        body: JSON.stringify({
+          customerId: Number(foodOrderCustomer.value),
+          items,
+        }),
+      });
+      foodOrderDialog.close();
+      showToast(response.message || 'Food order saved.');
+      await loadOrders();
+    } catch (error) {
+      showToast(error.message, 'error');
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
 
   statusFilter.addEventListener('change', loadOrders);
 

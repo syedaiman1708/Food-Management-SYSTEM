@@ -97,6 +97,11 @@ button, input, select, textarea {
   font-size: 0.95rem;
 }
 
+.site-nav a[aria-current="page"] {
+  color: var(--orange-500);
+  font-weight: 800;
+}
+
 .hero {
   background: var(--forest-900);
   color: white;
@@ -142,6 +147,7 @@ button, input, select, textarea {
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-wrap: wrap;
   margin-top: 28px;
 }
 
@@ -331,6 +337,172 @@ button, input, select, textarea {
 .menu-card-body h3 {
   margin: 12px 0 0;
   font-size: 1.15rem;
+}
+
+.order-menu-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.public-order-hero {
+  padding: 54px 0 36px;
+  color: white;
+  background: var(--forest-900);
+}
+
+.public-order-hero h1 {
+  margin: 10px 0;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  letter-spacing: -0.05em;
+}
+
+.public-order-hero p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.public-order-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  align-items: start;
+  gap: 26px;
+  padding-top: 40px;
+  padding-bottom: 64px;
+}
+
+.public-order-layout .heading-group h2 {
+  margin: 8px 0 0;
+}
+
+.public-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.public-menu-card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 10px 26px rgba(6, 59, 45, 0.04);
+}
+
+.public-menu-card img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+}
+
+.public-menu-card-body {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+}
+
+.public-menu-card-body h3,
+.public-menu-card-body p {
+  margin: 0;
+}
+
+.public-menu-card-body p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.public-menu-card-body .btn {
+  justify-self: start;
+  padding: 0.7rem 1rem;
+}
+
+.public-cart {
+  position: sticky;
+  top: 102px;
+}
+
+.public-cart .panel-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.public-cart-items {
+  display: grid;
+  gap: 12px;
+}
+
+.public-cart-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.public-cart-row > div:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.public-cart-row > div:first-child span {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.cart-quantity {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-quantity button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+  background: white;
+  cursor: pointer;
+}
+
+.public-cart-total {
+  display: flex;
+  justify-content: space-between;
+  margin: 18px 0 22px;
+  font-size: 1.05rem;
+}
+
+.public-checkout {
+  gap: 14px;
+}
+
+.public-checkout h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.public-checkout label {
+  font-size: 0.9rem;
+}
+
+.public-checkout input {
+  padding: 0.72rem 0.85rem;
+}
+
+.public-checkout .btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+}
+
+.order-confirmation {
+  margin: 18px 0 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(29, 156, 104, 0.1);
+  color: var(--forest-800);
+  font-weight: 700;
+  line-height: 1.5;
 }
 
 .split-layout {
@@ -879,6 +1051,33 @@ td {
   margin-bottom: 22px;
 }
 
+.order-item-list {
+  display: grid;
+  gap: 12px;
+}
+
+.order-item-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 110px auto auto;
+  align-items: end;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.order-item-price {
+  min-width: 82px;
+  padding-bottom: 12px;
+  text-align: right;
+}
+
+.order-form-total {
+  margin: 0;
+  text-align: right;
+  font-size: 1.1rem;
+}
+
 .grid-form {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1005,6 +1204,14 @@ td {
 }
 
 @media (max-width: 980px) {
+  .public-order-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .public-cart {
+    position: static;
+  }
+
   .feature-grid,
   .menu-card-grid,
   .summary-grid,
@@ -1087,6 +1294,10 @@ td {
     justify-content: center;
   }
 
+  .public-menu-grid {
+    grid-template-columns: 1fr;
+  }
+
   .hero {
     padding-top: 40px;
   }
@@ -1105,5 +1316,14 @@ td {
 
   .grid-form {
     grid-template-columns: 1fr;
+  }
+
+  .order-item-row {
+    grid-template-columns: 1fr 90px;
+  }
+
+  .order-item-price {
+    padding-bottom: 0;
+    text-align: left;
   }
 }

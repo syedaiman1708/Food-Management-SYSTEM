@@ -19,9 +19,10 @@ router.get('/', requireAuth, (req, res) => {
 
 router.post('/', requireAuth, (req, res) => {
   const { name, email, phone } = req.body;
+  const normalizedPhone = String(phone || '').replace(/\D/g, '');
 
-  if (!name || !email || !phone) {
-    return res.status(400).json({ message: 'Customer name, email, and phone are required.' });
+  if (!name || !email || !/^\d{10}$/.test(normalizedPhone)) {
+    return res.status(400).json({ message: 'Customer name, email, and a 10-digit mobile number are required.' });
   }
 
   const nextId = customers.length ? Math.max(...customers.map((customer) => customer.id)) + 1 : 1;
@@ -29,7 +30,7 @@ router.post('/', requireAuth, (req, res) => {
     id: nextId,
     name: String(name).trim(),
     email: String(email).trim(),
-    phone: String(phone).trim(),
+    phone: normalizedPhone,
     totalOrders: 0,
     totalSpent: 0,
   };

@@ -4,6 +4,17 @@ const { categories, foodItems } = require('../store');
 
 const router = express.Router();
 
+router.get('/public', (req, res) => {
+  const items = foodItems
+    .filter((item) => item.available)
+    .map((item) => ({
+      ...item,
+      category: categories.find((cat) => cat.id === item.category_id)?.name || 'General',
+    }));
+
+  return res.json({ items });
+});
+
 router.get('/', requireAuth, (req, res) => {
   const menu = foodItems.map((item) => ({
     ...item,

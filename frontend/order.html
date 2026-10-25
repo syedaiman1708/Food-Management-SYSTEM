@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FoodNest | Order Food</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container nav-wrap">
+        <a class="brand" href="/">
+          <span class="brand-mark">F</span>
+          <span>FoodNest</span>
+        </a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <a href="/">Home</a>
+          <a href="/#menu">Menu</a>
+          <a href="/order" aria-current="page">Order</a>
+          <a href="/login">Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="public-order-page">
+      <section class="public-order-hero">
+        <div class="container">
+          <span class="eyebrow accent">Fresh from our kitchen</span>
+          <h1>Order your favourites.</h1>
+          <p>Choose your dishes, add them to your order, and we’ll get them ready for you.</p>
+        </div>
+      </section>
+
+      <section class="container public-order-layout" aria-label="Place a food order">
+        <div>
+          <div class="heading-group">
+            <span class="eyebrow accent">Our menu</span>
+            <h2>Made fresh for you</h2>
+          </div>
+          <div class="public-menu-grid" id="publicMenu" aria-live="polite">
+            <p class="empty-state">Loading menu…</p>
+          </div>
+        </div>
+
+        <aside class="public-cart panel">
+          <div class="panel-header">
+            <h2>Your order</h2>
+          </div>
+          <div class="public-cart-items" id="cartItems" aria-live="polite"></div>
+          <div class="public-cart-total">
+            <span>Total</span>
+            <strong id="cartTotal">₹0</strong>
+          </div>
+
+          <form id="checkoutForm" class="stack-form public-checkout">
+            <h3>Contact details</h3>
+            <label>
+              <span>Your name</span>
+              <input id="orderName" name="name" type="text" maxlength="120" autocomplete="name" required />
+            </label>
+            <label>
+              <span>Mobile number (10 digits)</span>
+              <input id="orderPhone" name="phone" type="tel" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" autocomplete="tel-national" title="Enter exactly 10 digits" required />
+            </label>
+            <button class="btn btn-primary full-width" id="placeOrderButton" type="submit">Place order</button>
+          </form>
+
+          <p class="order-confirmation" id="orderConfirmation" role="status" hidden></p>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="brand"><span class="brand-mark">F</span><span>FoodNest</span></div>
+          <p>Fresh food, simply ordered.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/#menu">Menu</a></li>
+            <li><a href="/order">Order food</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./js/app.js"></script>
+    <script src="./js/public-order.js"></script>
+  </body>
+</html>

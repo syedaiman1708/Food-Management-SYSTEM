@@ -59,6 +59,7 @@ const pageMap = {
   '/': 'index.html',
   '/login': 'login.html',
   '/register': 'register.html',
+  '/order': 'order.html',
   '/dashboard': 'dashboard.html',
   '/menu': 'menu.html',
   '/orders': 'orders.html',
