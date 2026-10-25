@@ -1,4 +1,15 @@
-const API_BASE = '/api';
+const HOSTED_APP_URL = 'https://foodnest-fullstack-syedaiman1708.onrender.com';
+const API_BASE = window.location.hostname.endsWith('.github.io')
+  ? `${HOSTED_APP_URL}/api`
+  : '/api';
+
+if (window.location.hostname.endsWith('.github.io')) {
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-staff-login]').forEach((link) => {
+      link.href = `${HOSTED_APP_URL}/login`;
+    });
+  });
+}
 
 async function apiFetch(url, options = {}) {
   if (window.location.protocol === 'file:') {

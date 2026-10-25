@@ -1,7 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const storageFile = path.join(__dirname, '..', '.foodnest', 'orders.json');
+const storageDirectory = process.env.FOODNEST_STORAGE_DIR || path.join(__dirname, '..', '.foodnest');
+const storageFile = path.join(storageDirectory, 'orders.json');
 
 function loadOrderData() {
   if (!fs.existsSync(storageFile)) {

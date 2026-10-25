@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('loginForm');
   const registerForm = document.getElementById('registerForm');
+  const dashboardUrl = window.location.hostname.endsWith('.github.io')
+    ? `${HOSTED_APP_URL}/dashboard`
+    : '/dashboard';
 
   if (loginForm) {
     loginForm.addEventListener('submit', async (event) => {
@@ -17,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         showToast(result.message || 'Login successful');
-        window.location.href = '/dashboard';
+        window.location.href = dashboardUrl;
       } catch (error) {
         showToast(error.message, 'error');
       }
@@ -41,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         showToast(result.message || 'Registration complete');
-        window.location.href = '/dashboard';
+        window.location.href = dashboardUrl;
       } catch (error) {
         showToast(error.message, 'error');
       }
